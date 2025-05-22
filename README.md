@@ -16,6 +16,14 @@ diffusers>=0.33.0
 accelerate>=0.26.0
 ```
 
+>[!IMPORTANT]
+>new *diffusers* has changed the *FlowMatchEulerDiscrete* scheduler; updating will break Flux in Forge.
+>Fix:
+>* edit `backend\modules\k_prediction.py` line 300
+>* `        sigmas = math.exp(self.mu) / (math.exp(self.mu) + (1 / sigmas - 1) ** 1.0)`
+>* The current line is `        sigmas = FlowMatchEulerDiscreteScheduler ...`
+
+
 ---
 ### downloads models on demand - minimum will be ~10GB, if you already have the text encoder (Lumina2 uses the same text encoder as Sana). ###
 
